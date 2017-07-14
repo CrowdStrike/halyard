@@ -50,6 +50,9 @@ public class KubernetesRedisService extends RedisService implements KubernetesDi
   @Autowired
   KubernetesDistributedServiceDelegate distributedServiceDelegate;
 
+  @Autowired
+  String kubernetesRegistry;
+  
   @Delegate(excludes = HasServiceSettings.class)
   public DistributedLogCollector getLogCollector() {
     return getLogCollectorFactory().build(this);
@@ -89,7 +92,7 @@ public class KubernetesRedisService extends RedisService implements KubernetesDi
   }
 
   public String getArtifactId(String deploymentName) {
-    return "gcr.io/kubernetes-spinnaker/redis-cluster:v2";
+    return String.join("/", kubernetesRegistry, "redis-cluster:v2";
   }
 
   final DeployPriority deployPriority = new DeployPriority(5);

@@ -9,10 +9,12 @@ spinnaker:
   artifacts:
     debian: https://dl.bintray.com/spinnaker-releases/debians
     docker: gcr.io/spinnaker-marketplace
+    kubernetes: gcr.io/kubernetes-spinnaker
   config:
     input:
       writerEnabled: false
       bucket: halconfig
+      s3Enabled: false
 
 endpoints:
   env:

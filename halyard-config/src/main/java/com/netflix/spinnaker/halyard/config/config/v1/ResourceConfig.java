@@ -61,6 +61,31 @@ public class ResourceConfig {
     return spinconfigBucket;
   }
 
+  /**
+   * Use s3 instead of gcs for metadata.
+   *
+   * This is useful for customers deploying to environments without access to gcs. Requires
+   * publishing the metadata to s3 bucket specified by spinconfigBucket.
+   *
+   * @return s3 enabled flag.
+   */
+  @Bean
+  boolean s3Enabled(@Value("${spinnaker.config.input.s3Enabled:false}") boolean s3Enabled) {
+    return s3Enabled;
+  }
+ 
+  /**
+   * Kubernetes dependency specific docker registry path.
+   *
+   * Configurable for customers deploying to environments without access to gcr
+   *
+   * @return kubernetes dependency docker registry path
+   */
+  @Bean
+  boolean kubernetesRegistry(@Value("${spinnaker.artficts.kubernetes:gcr.io/kubernetes-spinnaker}") String kubernetesRegistry) {
+    return kubernetesRegistry;
+  }
+
   @Bean
   String spinnakerStagingDependencyPath(@Value("${spinnaker.config.staging.directory:~/.halyard}") String path) {
     return Paths.get(normalizePath(path), "dependency").toString();
